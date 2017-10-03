@@ -18,8 +18,7 @@ func UnaryServerInterceptor(app newrelic.Application) grpc.UnaryServerIntercepto
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
 		txn := app.StartTransaction(info.FullMethod, nil, nil)
 		defer txn.End()
-		ctx = context.WithValue(ctx, txnKey, txn)
-		return handler(ctx, req)
+		return handler(setTransaction(ctx, txn), req)
 	}
 }
 
@@ -29,7 +28,20 @@ func StreamServerInterceptor(app newrelic.Application) grpc.StreamServerIntercep
 		txn := app.StartTransaction(info.FullMethod, nil, nil)
 		defer txn.End()
 		wrappedStream := grpc_middleware.WrapServerStream(stream)
-		wrappedStream.WrappedContext = context.WithValue(wrappedStream.Context(), txnKey, txn)
+		wrappedStream.WrappedContext = setTransaction(wrappedStream.Context(), txn)
 		return handler(srv, stream)
 	}
+}
+
+// Transaction extracts newrelic transaction object from request context
+func Transaction(ctx context.Context) newrelic.Transaction {
+	v := ctx.Value(txnKey)
+	if v == nil {
+		return nil
+	}
+	return v.(newrelic.Transaction)
+}
+
+func setTransaction(ctx context.Context, txn newrelic.Transaction) context.Context {
+	return context.WithValue(ctx, txnKey, txn)
 }
