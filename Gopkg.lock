@@ -2,14 +2,50 @@
 
 
 [[projects]]
+  branch = "master"
+  name = "github.com/golang/protobuf"
+  packages = ["proto","ptypes","ptypes/any","ptypes/duration","ptypes/timestamp"]
+  revision = "130e6b02ab059e7b717a096f397c5b60111cae74"
+
+[[projects]]
+  branch = "master"
+  name = "github.com/grpc-ecosystem/go-grpc-middleware"
+  packages = ["."]
+  revision = "6d3547c644afb325c16df96e3c7177ea6e2fdebd"
+
+[[projects]]
   name = "github.com/newrelic/go-agent"
   packages = [".","internal","internal/jsonx","internal/logger","internal/sysinfo","internal/utilization"]
   revision = "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17"
   version = "v1.9.0"
 
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/net"
+  packages = ["context","http2","http2/hpack","idna","internal/timeseries","lex/httplex","trace"]
+  revision = "0a9397675ba34b2845f758fe3cd68828369c6517"
+
+[[projects]]
+  branch = "master"
+  name = "golang.org/x/text"
+  packages = ["collate","collate/build","internal/colltab","internal/gen","internal/tag","internal/triegen","internal/ucd","language","secure/bidirule","transform","unicode/bidi","unicode/cldr","unicode/norm","unicode/rangetable"]
+  revision = "1cbadb444a806fd9430d14ad08967ed91da4fa0a"
+
+[[projects]]
+  branch = "master"
+  name = "google.golang.org/genproto"
+  packages = ["googleapis/rpc/status"]
+  revision = "f676e0f3ac6395ff1a529ae59a6670878a8371a6"
+
+[[projects]]
+  name = "google.golang.org/grpc"
+  packages = [".","codes","connectivity","credentials","grpclb/grpc_lb_v1/messages","grpclog","internal","keepalive","metadata","naming","peer","stats","status","tap","transport"]
+  revision = "f92cdcd7dcdc69e81b2d7b338479a19a8723cfa3"
+  version = "v1.6.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "4a7c9ceb65f8db4738e7eecf59a32b2c30265ed93547f500de49330e498b7204"
+  inputs-digest = "ef0d1c7fc565c5f415f35bd8817d3b676cf82347281f635852169e5f392fb208"
   solver-name = "gps-cdcl"
   solver-version = 1
