@@ -29,7 +29,7 @@ func StreamServerInterceptor(app newrelic.Application) grpc.StreamServerIntercep
 		defer txn.End()
 		wrappedStream := grpc_middleware.WrapServerStream(stream)
 		wrappedStream.WrappedContext = setTransaction(wrappedStream.Context(), txn)
-		return handler(srv, stream)
+		return handler(srv, wrappedStream)
 	}
 }
 
