@@ -1,6 +1,7 @@
 package nrgrpc
 
 import (
+	"github.com/grpc-ecosystem/go-grpc-middleware"
 	"github.com/newrelic/go-agent"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
@@ -27,7 +28,8 @@ func StreamServerInterceptor(app newrelic.Application) grpc.StreamServerIntercep
 	return func(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
 		txn := app.StartTransaction(info.FullMethod, nil, nil)
 		defer txn.End()
-		// context.WithValue(ctx, txnKey, txn)
+		wrappedStream := grpc_middleware.WrapServerStream(stream)
+		wrappedStream.WrappedContext = context.WithValue(wrappedStream.Context(), txnKey, txn)
 		return handler(srv, stream)
 	}
 }
