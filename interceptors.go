@@ -14,8 +14,12 @@ var (
 )
 
 // UnaryServerInterceptor returns a new unary server interceptor to set newrelic transaction
-func UnaryServerInterceptor(app newrelic.Application) grpc.UnaryServerInterceptor {
+func UnaryServerInterceptor(app newrelic.Application, optFuncs ...Option) grpc.UnaryServerInterceptor {
+	opts := composeOptions(optFuncs)
 	return func(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (interface{}, error) {
+		if opts.IsIgnored(info.FullMethod) {
+			return handler(ctx, req)
+		}
 		txn := app.StartTransaction(info.FullMethod, nil, nil)
 		defer txn.End()
 		return handler(setTransaction(ctx, txn), req)
@@ -23,8 +27,12 @@ func UnaryServerInterceptor(app newrelic.Application) grpc.UnaryServerIntercepto
 }
 
 // StreamServerInterceptor returns a new streaming server interceptor to set newrelic transaction
-func StreamServerInterceptor(app newrelic.Application) grpc.StreamServerInterceptor {
+func StreamServerInterceptor(app newrelic.Application, optFuncs ...Option) grpc.StreamServerInterceptor {
+	opts := composeOptions(optFuncs)
 	return func(srv interface{}, stream grpc.ServerStream, info *grpc.StreamServerInfo, handler grpc.StreamHandler) error {
+		if opts.IsIgnored(info.FullMethod) {
+			return handler(srv, stream)
+		}
 		txn := app.StartTransaction(info.FullMethod, nil, nil)
 		defer txn.End()
 		wrappedStream := grpc_middleware.WrapServerStream(stream)
