@@ -19,7 +19,8 @@ func composeOptions(funcs []Option) Options {
 	return o
 }
 
-func (o *Options) isIgnored(fullMethod string) bool {
+// IsIgnored returned true if the given method is ignored
+func (o *Options) IsIgnored(fullMethod string) bool {
 	if len(o.IgnoredServices) == 0 {
 		return false
 	}
