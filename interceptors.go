@@ -22,7 +22,11 @@ func UnaryServerInterceptor(app newrelic.Application, optFuncs ...Option) grpc.U
 		}
 		txn := app.StartTransaction(info.FullMethod, nil, nil)
 		defer txn.End()
-		return handler(setTransaction(ctx, txn), req)
+		resp, err := handler(setTransaction(ctx, txn), req)
+		if err != nil && opts.NotifyingErrors {
+			txn.NoticeError(err)
+		}
+		return resp, err
 	}
 }
 
@@ -37,7 +41,11 @@ func StreamServerInterceptor(app newrelic.Application, optFuncs ...Option) grpc.
 		defer txn.End()
 		wrappedStream := grpc_middleware.WrapServerStream(stream)
 		wrappedStream.WrappedContext = setTransaction(wrappedStream.Context(), txn)
-		return handler(srv, wrappedStream)
+		err := handler(srv, wrappedStream)
+		if err != nil && opts.NotifyingErrors {
+			txn.NoticeError(err)
+		}
+		return err
 	}
 }
 
