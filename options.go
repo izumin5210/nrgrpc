@@ -6,7 +6,6 @@ import "strings"
 type Options struct {
 	IgnoredServices map[string]struct{}
 	IgnoredMethods  map[string]struct{}
-	NotifyingErrors bool
 }
 
 func composeOptions(funcs []Option) Options {
@@ -55,14 +54,6 @@ func WithIgnoredMethods(fullMethods ...string) Option {
 		for _, m := range fullMethods {
 			o.IgnoredMethods[m] = struct{}{}
 		}
-		return o
-	}
-}
-
-// WithNotifyingErrors returned an Option that enable to notice erorrs to the New Relic error collector.
-func WithNotifyingErrors() Option {
-	return func(o Options) Options {
-		o.NotifyingErrors = true
 		return o
 	}
 }
