@@ -12,11 +12,22 @@ func NewClientStatsHandler() stats.Handler {
 	return &clientStatsHandlerImpl{}
 }
 
+// NewGatewayStatsHandler creates a new stats.Handler instance for measuring application performances with New Relic.
+func NewGatewayStatsHandler() stats.Handler {
+	return &clientStatsHandlerImpl{updateTxnName: true}
+}
+
 type clientStatsHandlerImpl struct {
+	updateTxnName bool
 }
 
 func (h *clientStatsHandlerImpl) TagRPC(ctx context.Context, info *stats.RPCTagInfo) context.Context {
 	txn := nrutil.Transaction(ctx)
+
+	if h.updateTxnName {
+		txn.SetName(info.FullMethodName)
+	}
+
 	seg := newrelic.StartSegment(txn, info.FullMethodName)
 
 	return setSegment(ctx, seg)
@@ -38,17 +49,4 @@ func (h *clientStatsHandlerImpl) TagConn(ctx context.Context, info *stats.ConnTa
 
 func (h *clientStatsHandlerImpl) HandleConn(ctx context.Context, s stats.ConnStats) {
 	// no-op
-}
-
-type ctxKeyClientSegment struct{}
-
-func setSegment(ctx context.Context, seg newrelic.Segment) context.Context {
-	return context.WithValue(ctx, ctxKeyClientSegment{}, seg)
-}
-
-func getSegment(ctx context.Context) (st newrelic.Segment, ok bool) {
-	if v := ctx.Value(ctxKeyClientSegment{}); v != nil {
-		st, ok = v.(newrelic.Segment)
-	}
-	return
 }
