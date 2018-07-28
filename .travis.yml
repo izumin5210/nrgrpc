@@ -1,0 +1,31 @@
+language: go
+
+matrix:
+  include:
+  - go: "1.9"
+  - go: "1.10"
+    env: COVERAGE_ENABLED=1
+
+cache:
+  directories:
+  - vendor
+  - $GOPATH/pkg/dep
+
+before_install:
+- go get -u github.com/golang/dep/cmd/dep
+- go get -u github.com/golang/lint/golint
+
+install:
+- dep ensure -v -vendor-only
+
+script:
+- go list ./... | xargs golint -set_exit_status
+- |
+  if [ "$COVERAGE_ENABLED" = 1 ]; then
+    go test -coverprofile=coverage.txt -covermode=atomic ./...;
+  else
+    go test ./...;
+  fi
+
+after_success:
+- test "$COVERAGE_ENABLED" = 1 && bash <(curl -s https://codecov.io/bash)
