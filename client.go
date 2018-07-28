@@ -28,7 +28,8 @@ func (h *clientStatsHandlerImpl) TagRPC(ctx context.Context, info *stats.RPCTagI
 		txn.SetName(info.FullMethodName)
 	}
 
-	seg := newrelic.StartSegment(txn, info.FullMethodName)
+	seg := newrelic.StartExternalSegment(txn, nil)
+	seg.URL = info.FullMethodName
 
 	return setSegment(ctx, seg)
 }
