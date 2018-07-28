@@ -22,11 +22,7 @@ type FakeNRApp struct {
 
 // StartTransaction implements the newrelic.Application interface.
 func (a *FakeNRApp) StartTransaction(name string, _ http.ResponseWriter, _ *http.Request) newrelic.Transaction {
-	txn := &FakeNRTxn{
-		Name:  name,
-		Attrs: make(map[string]interface{}),
-		t:     a.t,
-	}
+	txn := NewFakeNRTxn(a.t, name)
 	a.Txns = append(a.Txns, txn)
 	return txn
 }
@@ -36,6 +32,15 @@ func (a *FakeNRApp) CheckTxnCount(c int) {
 	a.t.Helper()
 	if got, want := len(a.Txns), c; got != want {
 		a.t.Fatalf("The application has %d transactions, want %d", got, want)
+	}
+}
+
+// NewFakeNRTxn returns a new fake newrelic.Transaction instnace.
+func NewFakeNRTxn(t *testing.T, name string) *FakeNRTxn {
+	return &FakeNRTxn{
+		Name:  name,
+		Attrs: make(map[string]interface{}),
+		t:     t,
 	}
 }
 
@@ -62,6 +67,12 @@ func (t *FakeNRTxn) Ignore() error {
 	return nil
 }
 
+// SetName implements the newrelic.Transaction interface.
+func (t *FakeNRTxn) SetName(name string) error {
+	t.Name = name
+	return nil
+}
+
 // NoticeError implements the newrelic.Transaction interface.
 func (t *FakeNRTxn) NoticeError(err error) error {
 	t.Errs = append(t.Errs, err)
@@ -72,6 +83,11 @@ func (t *FakeNRTxn) NoticeError(err error) error {
 func (t *FakeNRTxn) AddAttribute(k string, v interface{}) error {
 	t.Attrs[k] = v
 	return nil
+}
+
+// StartSegmentNow implements the newrelic.Transaction interface.
+func (t *FakeNRTxn) StartSegmentNow() newrelic.SegmentStartTime {
+	return newrelic.SegmentStartTime{}
 }
 
 // CheckEnded fails the test if the transaction has been ended.
