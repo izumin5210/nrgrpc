@@ -26,9 +26,5 @@
   version = "^1.0.0"
 
 [[constraint]]
-  branch = "master"
-  name = "github.com/grpc-ecosystem/go-grpc-middleware"
-
-[[constraint]]
-  branch = "master"
   name = "github.com/izumin5210/newrelic-contrib-go"
+  version = "^0.1.0"
