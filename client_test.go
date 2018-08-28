@@ -1,11 +1,11 @@
 package nrgrpc
 
 import (
+	"context"
 	"testing"
 
 	"github.com/izumin5210/newrelic-contrib-go/nrutil"
 	nrgrpctesting "github.com/izumin5210/nrgrpc/testing"
-	"golang.org/x/net/context"
 )
 
 func Test_Client(t *testing.T) {
