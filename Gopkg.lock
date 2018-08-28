@@ -17,12 +17,12 @@
   revision = "130e6b02ab059e7b717a096f397c5b60111cae74"
 
 [[projects]]
-  digest = "1:8c1bb40983924efa968b5b2c1b5d2273226c7831abf740505b10fd21ab4e322a"
+  digest = "1:b9ab1e06a2db4811ea4c9734d01856e7771a8baedea34a2bf50a4ec683b20d0d"
   name = "github.com/izumin5210/newrelic-contrib-go"
   packages = ["nrutil"]
   pruneopts = ""
-  revision = "c66863b8c7cce7650983f098b653baf736389bea"
-  version = "v0.1.0"
+  revision = "f1fce2d301bdceaf0141be8e6c369fa600253db6"
+  version = "v0.1.1"
 
 [[projects]]
   digest = "1:6921a84aa66af28f35794c0369fc5eb98081d6e23afd4c592e99ed8e7c90b11d"

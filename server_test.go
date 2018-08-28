@@ -1,10 +1,10 @@
 package nrgrpc
 
 import (
+	"context"
 	"testing"
 
 	"github.com/golang/protobuf/ptypes/empty"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc/codes"
 
 	nrgrpctesting "github.com/izumin5210/nrgrpc/testing"

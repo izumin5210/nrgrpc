@@ -1,9 +1,10 @@
 package nrgrpc
 
 import (
+	"context"
+
 	"github.com/izumin5210/newrelic-contrib-go/nrutil"
 	"github.com/newrelic/go-agent"
-	"golang.org/x/net/context"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
 	"google.golang.org/grpc/stats"

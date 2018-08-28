@@ -1,8 +1,9 @@
 package nrgrpc
 
 import (
-	newrelic "github.com/newrelic/go-agent"
-	"golang.org/x/net/context"
+	"context"
+
+	"github.com/newrelic/go-agent"
 )
 
 type ctxKeyClientSegment struct{}

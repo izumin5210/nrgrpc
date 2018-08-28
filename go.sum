@@ -1,0 +1,17 @@
+github.com/golang/protobuf v0.0.0-20170920220647-130e6b02ab05 h1:Kesru7U6Mhpf/x7rthxAKnr586VFmoE2NdEvkOKvfjg=
+github.com/golang/protobuf v0.0.0-20170920220647-130e6b02ab05/go.mod h1:6lQm79b+lXiMfvg/cZm0SGofjICqVBUtrP5yJMmIC1U=
+github.com/izumin5210/isql v0.0.0-20180722142634-6ef7371f8ade/go.mod h1:R6MGkhvXuHPgF408nzpimaviQmPyOzLl4GX8//IYpCc=
+github.com/izumin5210/newrelic-contrib-go v0.1.1 h1:fLpaBINRqFf0elMdxWvbpHy+TVBU9OWXZPgIUFAj2mM=
+github.com/izumin5210/newrelic-contrib-go v0.1.1/go.mod h1:aDHOTguNPm3pBbMpWmayfrFFSb4L/1oJZD4wdrXov4k=
+github.com/newrelic/go-agent v1.11.0 h1:jnd8+H6dB+93UTJHFT1wJoij5spKNN/xZ0nkw0kvt7o=
+github.com/newrelic/go-agent v1.11.0/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
+golang.org/x/net v0.0.0-20170927055102-0a9397675ba3 h1:tTDpczhDVjW6WN3DinzKcw5juwkDTVn22I7MNlfxSXM=
+golang.org/x/net v0.0.0-20170927055102-0a9397675ba3/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
+golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f h1:wMNYb4v58l5UBM7MYRLPG6ZhfOqbKu7X5eyFl8ZhKvA=
+golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+golang.org/x/text v0.0.0-20170915090833-1cbadb444a80 h1:LMxnNSL1jel8frQKy+gjCcwcgLsd3UEDVGg9DD8ryxw=
+golang.org/x/text v0.0.0-20170915090833-1cbadb444a80/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=
+google.golang.org/genproto v0.0.0-20171002232614-f676e0f3ac63 h1:yNBw5bwywOTguAu+h6SkCUaWdEZ7ZXgfiwb2YTN1eQw=
+google.golang.org/genproto v0.0.0-20171002232614-f676e0f3ac63/go.mod h1:JiN7NxoALGmiZfu7CAH4rXhgtRTLTxftemlI0sWmxmc=
+google.golang.org/grpc v1.6.0 h1:vaySXtNtPrLJFCiET8QXtfBrqq16ynklmFGaZwLcd1M=
+google.golang.org/grpc v1.6.0/go.mod h1:yo6s7OP7yaDglbqo1J04qKzAhqBH6lvTonzMVmEdcZw=
