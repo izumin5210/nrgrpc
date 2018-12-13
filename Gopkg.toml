@@ -21,9 +21,9 @@
 #  version = "2.4.0"
 
 
-[[constraint]]
+[[override]]
   name = "github.com/newrelic/go-agent"
-  version = "^1.0.0"
+  version = "^2.1"
 
 [[constraint]]
   name = "github.com/izumin5210/newrelic-contrib-go"
