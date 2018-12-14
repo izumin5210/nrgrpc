@@ -7,5 +7,5 @@ require (
 	golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f // indirect
 	golang.org/x/text v0.0.0-20170915090833-1cbadb444a80 // indirect
 	google.golang.org/genproto v0.0.0-20171002232614-f676e0f3ac63 // indirect
-	google.golang.org/grpc v1.6.0
+	google.golang.org/grpc v1.13.0
 )

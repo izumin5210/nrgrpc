@@ -50,6 +50,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:c2c4c39f961dde3f317a48713db65329863b61316edabf19b96784b2da8406ac"
+  name = "golang.org/x/sys"
+  packages = ["unix"]
+  pruneopts = ""
+  revision = "4d1cda033e0619309c606fc686de3adcf599539e"
+
+[[projects]]
+  branch = "master"
   digest = "1:6ffd50f330d82d5a92f109253f3831900ccb99f973fb7d614e54ceaf6a41dcec"
   name = "golang.org/x/text"
   packages = [
@@ -80,28 +88,44 @@
   revision = "f676e0f3ac6395ff1a529ae59a6670878a8371a6"
 
 [[projects]]
-  digest = "1:b3c989821c14a572c49a8091fd1e832a5e53d3ae2fbf90ed3ea46cef4863aad9"
+  digest = "1:d141efe4aaad714e3059c340901aab3147b6253e58c85dafbcca3dd8b0e88ad6"
   name = "google.golang.org/grpc"
   packages = [
     ".",
+    "balancer",
+    "balancer/base",
+    "balancer/roundrobin",
+    "binarylog/grpc_binarylog_v1",
     "codes",
     "connectivity",
     "credentials",
-    "grpclb/grpc_lb_v1/messages",
+    "credentials/internal",
+    "encoding",
+    "encoding/proto",
     "grpclog",
     "internal",
+    "internal/backoff",
+    "internal/binarylog",
+    "internal/channelz",
+    "internal/envconfig",
+    "internal/grpcrand",
+    "internal/grpcsync",
+    "internal/syscall",
+    "internal/transport",
     "keepalive",
     "metadata",
     "naming",
     "peer",
+    "resolver",
+    "resolver/dns",
+    "resolver/passthrough",
     "stats",
     "status",
     "tap",
-    "transport",
   ]
   pruneopts = ""
-  revision = "f92cdcd7dcdc69e81b2d7b338479a19a8723cfa3"
-  version = "v1.6.0"
+  revision = "df014850f6dee74ba2fc94874043a9f3f75fbfd8"
+  version = "v1.17.0"
 
 [solve-meta]
   analyzer-name = "dep"

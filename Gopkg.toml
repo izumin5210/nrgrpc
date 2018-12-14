@@ -24,3 +24,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/newrelic/go-agent"
+
+[[constraint]]
+  name = "google.golang.org/grpc"
+  version = "^1.13"

@@ -14,3 +14,5 @@ google.golang.org/genproto v0.0.0-20171002232614-f676e0f3ac63 h1:yNBw5bwywOTguAu
 google.golang.org/genproto v0.0.0-20171002232614-f676e0f3ac63/go.mod h1:JiN7NxoALGmiZfu7CAH4rXhgtRTLTxftemlI0sWmxmc=
 google.golang.org/grpc v1.6.0 h1:vaySXtNtPrLJFCiET8QXtfBrqq16ynklmFGaZwLcd1M=
 google.golang.org/grpc v1.6.0/go.mod h1:yo6s7OP7yaDglbqo1J04qKzAhqBH6lvTonzMVmEdcZw=
+google.golang.org/grpc v1.13.0 h1:bHIbVsCwmvbArgCJmLdgOdHFXlKqTOVjbibbS19cXHc=
+google.golang.org/grpc v1.13.0/go.mod h1:yo6s7OP7yaDglbqo1J04qKzAhqBH6lvTonzMVmEdcZw=
