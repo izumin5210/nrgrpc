@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	"github.com/izumin5210/newrelic-contrib-go/nrutil"
 	nrgrpctesting "github.com/izumin5210/nrgrpc/testing"
+	"github.com/newrelic/go-agent"
 )
 
 func Test_Client(t *testing.T) {
@@ -16,7 +16,7 @@ func Test_Client(t *testing.T) {
 
 	txn := nrgrpctesting.NewFakeNRTxn(t, "/echo")
 
-	resp, err := ctx.Client.Echo(nrutil.SetTransaction(context.TODO(), txn), &nrgrpctesting.EchoRequest{Message: "foobar"})
+	resp, err := ctx.Client.Echo(newrelic.NewContext(context.TODO(), txn), &nrgrpctesting.EchoRequest{Message: "foobar"})
 
 	if resp == nil {
 		t.Error("The request should return a response")
@@ -39,7 +39,7 @@ func Test_Gateway(t *testing.T) {
 
 	txn := nrgrpctesting.NewFakeNRTxn(t, "/echo")
 
-	resp, err := ctx.Client.Echo(nrutil.SetTransaction(context.TODO(), txn), &nrgrpctesting.EchoRequest{Message: "foobar"})
+	resp, err := ctx.Client.Echo(newrelic.NewContext(context.TODO(), txn), &nrgrpctesting.EchoRequest{Message: "foobar"})
 
 	if resp == nil {
 		t.Error("The request should return a response")

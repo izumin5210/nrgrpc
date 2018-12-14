@@ -3,7 +3,6 @@ package nrgrpc
 import (
 	"context"
 
-	"github.com/izumin5210/newrelic-contrib-go/nrutil"
 	"github.com/newrelic/go-agent"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/metadata"
@@ -31,7 +30,7 @@ func (h *serverStatsHandlerImpl) TagRPC(ctx context.Context, info *stats.RPCTagI
 		txn.Ignore()
 	}
 
-	ctx = nrutil.SetTransaction(ctx, txn)
+	ctx = newrelic.NewContext(ctx, txn)
 
 	return ctx
 }
@@ -39,7 +38,7 @@ func (h *serverStatsHandlerImpl) TagRPC(ctx context.Context, info *stats.RPCTagI
 func (h *serverStatsHandlerImpl) HandleRPC(ctx context.Context, s stats.RPCStats) {
 	switch s := s.(type) {
 	case *stats.End:
-		txn := nrutil.Transaction(ctx)
+		txn := newrelic.FromContext(ctx)
 		if md, ok := metadata.FromIncomingContext(ctx); ok {
 			txn.AddAttribute("metadata", md)
 		}

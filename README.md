@@ -13,8 +13,8 @@ gRPC `stats.Handler` implementation to measure and send performances metrics to 
 
 `nrgrpc.NewServerStatsHandler` creates a [`stats.Handler`](https://godoc.org/google.golang.org/grpc/stats#Handler) instance for gRPC servers.
 When the handler is passed to a gRPC server with [`stats.StatsHandler`](https://godoc.org/google.golang.org/grpc#StatsHandler),
-it will set a [`newrelic.Transaction`](https://godoc.org/github.com/newrelic/go-agent#Transaction) into a request `context.Context` using [`nrutil.SetTransaction`](https://godoc.org/github.com/izumin5210/newrelic-contrib-go/nrutil#SetTransaction).
-So you can retrieve `newrelic.Transaction` instances with [`nrutil.Transaction`](https://godoc.org/github.com/izumin5210/newrelic-contrib-go/nrutil#Transaction).
+it will set a [`newrelic.Transaction`](https://godoc.org/github.com/newrelic/go-agent#Transaction) into a request `context.Context` using [`newrelic.NewContext`](https://godoc.org/github.com/newrelic/go-agent#NewContext).
+So you can retrieve `newrelic.Transaction` instances with [`newrelic.FromContext`](https://godoc.org/github.com/newrelic/go-agent#FromContext).
 
 ```go
 func main() {
@@ -67,7 +67,7 @@ func main() {
 	}
 
 
-	// Register http handler using `github.com/izumin5210/newrelic-contrib-go/nrhttp`.
+	// Register http handler using `https://godoc.org/github.com/newrelic/go-agent.WrapHandleFunc`.
 	// This wrapper sets `newrelic.Transaction` into the `http.Request`'s context.
 	nrhttp.WrapHandleFunc(app, "/foo", func(w http.ResponseWriter, r *http.Request) {
 		resp, err := NewFooServiceClient.BarCall(r.Context(), &BarRequest{})

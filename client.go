@@ -3,7 +3,6 @@ package nrgrpc
 import (
 	"context"
 
-	"github.com/izumin5210/newrelic-contrib-go/nrutil"
 	"github.com/newrelic/go-agent"
 	"google.golang.org/grpc/stats"
 )
@@ -23,7 +22,7 @@ type clientStatsHandlerImpl struct {
 }
 
 func (h *clientStatsHandlerImpl) TagRPC(ctx context.Context, info *stats.RPCTagInfo) context.Context {
-	txn := nrutil.Transaction(ctx)
+	txn := newrelic.FromContext(ctx)
 
 	if h.updateTxnName {
 		txn.SetName(info.FullMethodName)

@@ -23,8 +23,4 @@
 
 [[constraint]]
   name = "github.com/newrelic/go-agent"
-  version = "^1.0.0"
-
-[[constraint]]
-  name = "github.com/izumin5210/newrelic-contrib-go"
-  version = "^0.1.1"
+  version = "^2.1"

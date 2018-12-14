@@ -17,27 +17,20 @@
   revision = "130e6b02ab059e7b717a096f397c5b60111cae74"
 
 [[projects]]
-  digest = "1:b9ab1e06a2db4811ea4c9734d01856e7771a8baedea34a2bf50a4ec683b20d0d"
-  name = "github.com/izumin5210/newrelic-contrib-go"
-  packages = ["nrutil"]
-  pruneopts = ""
-  revision = "f1fce2d301bdceaf0141be8e6c369fa600253db6"
-  version = "v0.1.1"
-
-[[projects]]
-  digest = "1:6921a84aa66af28f35794c0369fc5eb98081d6e23afd4c592e99ed8e7c90b11d"
+  digest = "1:896fa40f307b91a53bd675225a653cde46e9183f165efd2df1b4bffe02dab40f"
   name = "github.com/newrelic/go-agent"
   packages = [
     ".",
     "internal",
+    "internal/cat",
     "internal/jsonx",
     "internal/logger",
     "internal/sysinfo",
     "internal/utilization",
   ]
   pruneopts = ""
-  revision = "29ec3cd1bb2f21d21d36da37dae52695cb2c3a17"
-  version = "v1.9.0"
+  revision = "46d73e6be8b4faeee70850d0df829e4fe00d6819"
+  version = "v2.1.0"
 
 [[projects]]
   branch = "master"
@@ -116,7 +109,6 @@
   input-imports = [
     "github.com/golang/protobuf/proto",
     "github.com/golang/protobuf/ptypes/empty",
-    "github.com/izumin5210/newrelic-contrib-go/nrutil",
     "github.com/newrelic/go-agent",
     "golang.org/x/net/context",
     "google.golang.org/grpc",
