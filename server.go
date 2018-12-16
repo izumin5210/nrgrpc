@@ -30,6 +30,7 @@ func (h *serverStatsHandlerImpl) TagRPC(ctx context.Context, info *stats.RPCTagI
 		txn.Ignore()
 	}
 
+	txn.SetWebRequest(newRequest(ctx, info.FullMethodName))
 	ctx = newrelic.NewContext(ctx, txn)
 
 	return ctx
