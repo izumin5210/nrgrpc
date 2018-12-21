@@ -91,7 +91,7 @@ func (t *FakeNRTxn) StartSegmentNow() newrelic.SegmentStartTime {
 }
 
 // SetWebRequest implements the newrelic.Transaction interface.
-func (t *FakeNRTxn) SetWebRequest(req interface{}) error {
+func (t *FakeNRTxn) SetWebRequest(req newrelic.WebRequest) error {
 	return nil
 }
 

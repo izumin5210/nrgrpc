@@ -14,7 +14,7 @@ type request struct {
 	header http.Header
 }
 
-func newRequest(ctx context.Context, fullMethodName string) newrelic.Request {
+func newRequest(ctx context.Context, fullMethodName string) newrelic.WebRequest {
 	h := http.Header{}
 	h.Add("content-type", "application/grpc")
 	md, ok := metadata.FromIncomingContext(ctx)
