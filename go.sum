@@ -4,6 +4,8 @@ github.com/newrelic/go-agent v2.1.0+incompatible h1:fCuxXeM4eeIKPbzffOWW6y2Dj+eY
 github.com/newrelic/go-agent v2.1.0+incompatible/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
 github.com/newrelic/go-agent v2.1.1-0.20181115020221-36a6d903e104+incompatible h1:4Ke1f/hTLEpxrb58ttJHzjp+L/Lw4W2iE7J53o1El8o=
 github.com/newrelic/go-agent v2.1.1-0.20181115020221-36a6d903e104+incompatible/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
+github.com/newrelic/go-agent v2.2.0+incompatible h1:h7uU1vi+U6Z8TW4az5yewM68QMScsArxezuHvDFgSvU=
+github.com/newrelic/go-agent v2.2.0+incompatible/go.mod h1:a8Fv1b/fYhFSReoTU6HDkTYIMZeSVNffmoS726Y0LzQ=
 golang.org/x/net v0.0.0-20170927055102-0a9397675ba3 h1:tTDpczhDVjW6WN3DinzKcw5juwkDTVn22I7MNlfxSXM=
 golang.org/x/net v0.0.0-20170927055102-0a9397675ba3/go.mod h1:mL1N/T3taQHkDXs73rZJwtUhF3w3ftmwwsq0BUmARs4=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f h1:wMNYb4v58l5UBM7MYRLPG6ZhfOqbKu7X5eyFl8ZhKvA=
