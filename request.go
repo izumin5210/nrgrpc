@@ -61,5 +61,5 @@ func (r *request) Method() string {
 
 func (r *request) Transport() newrelic.TransportType {
 	// TODO: should define `TransportGRPC"
-	return newrelic.TransportUnknown
+	return newrelic.TransportOther
 }
