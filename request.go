@@ -14,16 +14,30 @@ type request struct {
 	header http.Header
 }
 
+var (
+	mappedHeaders = []struct{ from, to string }{
+		{from: newrelic.DistributedTracePayloadHeader},
+		{from: "user-agent"},
+		{from: "x-request-start", to: "x-request-start"},
+		{from: "x-queue-start", to: "x-queue-start"},
+		{from: "grpcgateway-x-request-start", to: "x-request-start"},
+		{from: "grpcgateway-x-queue-start", to: "x-queue-start"},
+	}
+)
+
 func newRequest(ctx context.Context, fullMethodName string) newrelic.WebRequest {
 	h := http.Header{}
 	h.Add("content-type", "application/grpc")
-	md, ok := metadata.FromIncomingContext(ctx)
-	if ok {
-		if v := md.Get(newrelic.DistributedTracePayloadHeader); len(v) > 0 {
-			h.Add(newrelic.DistributedTracePayloadHeader, v[0])
-		}
-		if v := md.Get("user-agent"); len(v) > 0 {
-			h.Add("user-agent", v[0])
+	if md, ok := metadata.FromIncomingContext(ctx); ok {
+		for _, m := range mappedHeaders {
+			from := m.from
+			to := m.to
+			if to == "" {
+				to = from
+			}
+			if v := md.Get(from); len(v) > 0 {
+				h.Add(to, v[0])
+			}
 		}
 	}
 
