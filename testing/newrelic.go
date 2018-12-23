@@ -90,6 +90,11 @@ func (t *FakeNRTxn) StartSegmentNow() newrelic.SegmentStartTime {
 	return newrelic.SegmentStartTime{}
 }
 
+// SetWebRequest implements the newrelic.Transaction interface.
+func (t *FakeNRTxn) SetWebRequest(req newrelic.WebRequest) error {
+	return nil
+}
+
 // CheckEnded fails the test if the transaction has been ended.
 func (t *FakeNRTxn) CheckEnded() {
 	t.t.Helper()

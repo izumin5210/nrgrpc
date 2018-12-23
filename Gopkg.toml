@@ -23,4 +23,8 @@
 
 [[constraint]]
   name = "github.com/newrelic/go-agent"
-  version = "^2.1"
+  version = "^2.2"
+
+[[constraint]]
+  name = "google.golang.org/grpc"
+  version = "^1.13"
