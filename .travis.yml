@@ -1,35 +1,42 @@
 language: go
 
-matrix:
-  include:
-  - go: "1.9"
-    env:
-    - DEP_ENABLED=1
-  - go: "1.10"
-    env:
-    - DEP_ENABLED=1
-  - go: "1.11"
-    env:
-    - GO111MODULE=on
+go: "1.11"
 
 cache:
   directories:
   - $GOPATH/pkg/dep
   - $GOPATH/pkg/mod
 
-before_install:
-- go get -u github.com/golang/lint/golint
-- |
-  if [ "$DEP_ENABLED" = 1 ]; then
-    go get -u github.com/golang/dep/cmd/dep;
-  fi
+jobs:
+  include:
+  - &dep
+    before_install:
+    - curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
+    include:
+    - dep ensure -v -vendor-only
+    script:
+    - go get golang.org/x/lint/golint
+    - go list ./... | xargs golint -set_exit_status
+    if: type != 'pull_request'
 
-install:
-- |
-  if [ "$DEP_ENABLED" = 1 ]; then
-    dep ensure -v -vendor-only;
-  fi
+  - &dep-test
+    <<: *dep
+    script:
+    - go test -v ./...
 
-script:
-- go list ./... | xargs golint -set_exit_status
-- go test -v ./...
+  - <<: *dep-test
+    go: '1.9'
+
+  - <<: *dep-test
+    go: '1.10'
+
+  - <<: *dep-test
+    go: 'master'
+
+  - name: '1.11 with Modules'
+    env:
+    - GO111MODULE=on
+    install:
+    - go get -v
+    script:
+    - go test -v ./...
