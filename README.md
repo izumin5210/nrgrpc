@@ -12,7 +12,7 @@ gRPC `stats.Handler` implementation to measure and send performances metrics to 
 ### gRPC server
 
 `nrgrpc.NewServerStatsHandler` creates a [`stats.Handler`](https://godoc.org/google.golang.org/grpc/stats#Handler) instance for gRPC servers.
-When the handler is passed to a gRPC server with [`stats.StatsHandler`](https://godoc.org/google.golang.org/grpc#StatsHandler),
+When the handler is passed to a gRPC server with [`grpc.StatsHandler`](https://godoc.org/google.golang.org/grpc#StatsHandler),
 it will set a [`newrelic.Transaction`](https://godoc.org/github.com/newrelic/go-agent#Transaction) into a request `context.Context` using [`newrelic.NewContext`](https://godoc.org/github.com/newrelic/go-agent#NewContext).
 So you can retrieve `newrelic.Transaction` instances with [`newrelic.FromContext`](https://godoc.org/github.com/newrelic/go-agent#FromContext).
 
@@ -34,7 +34,7 @@ func main() {
 
 	s := grpc.NewServer(
 		// Create a `stats.Handler` from `newrelic.Application`
-		stats.StatsHandler(nrgrpc.NewServerStatsHandler(nrapp)),
+		grpc.StatsHandler(nrgrpc.NewServerStatsHandler(nrapp)),
 	)
 
 	// Register server implementations
