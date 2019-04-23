@@ -24,10 +24,8 @@ func main() {
 	}
 
 	// Initiailze a `newrelic.Appliation`
-	nrapp, err := newrelic.NewApplication(newrelic.Config{
-		AppName: "your_app",
-		License: "your_license_key",
-	})
+	cfg := newrelic.NewConfig("your_app","your_license_key")
+	nrapp, err := newrelic.NewApplication(cfg)
 	if err != nil {
 		panic(err)
 	}
