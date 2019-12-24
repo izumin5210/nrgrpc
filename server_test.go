@@ -93,3 +93,29 @@ func Test_Server_Ignored(t *testing.T) {
 	txn.CheckIgnored(true)
 	txn.CheckErrorCount(0)
 }
+
+func Test_Server_CodeIgnored(t *testing.T) {
+	app := nrgrpctesting.NewFakeNRApp(t)
+
+	ctx := nrgrpctesting.CreateTestContext(t)
+	ctx.SetServerStatsHandler(NewServerStatsHandler(app, WithIgnoredCodes(codes.Internal)))
+	ctx.Setup()
+	defer ctx.Teardown()
+
+	resp, err := ctx.Client.Error(context.TODO(), new(empty.Empty))
+
+	if resp != nil {
+		t.Errorf("should not return a response, but got %v", resp)
+	}
+
+	if err == nil {
+		t.Error("should return errors")
+	}
+
+	app.CheckTxnCount(1)
+
+	txn := app.Txns[0]
+
+	txn.CheckEnded()
+	txn.CheckIgnored(true)
+}
