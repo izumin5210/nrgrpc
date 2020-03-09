@@ -1,17 +1,23 @@
 package nrgrpc
 
-import "strings"
+import (
+	"strings"
+
+	"google.golang.org/grpc/codes"
+)
 
 // Options contains some configurations for an interceptor
 type Options struct {
 	IgnoredServices map[string]struct{}
 	IgnoredMethods  map[string]struct{}
+	IgnoredCodes    map[codes.Code]struct{}
 }
 
 func composeOptions(funcs []Option) Options {
 	o := Options{
 		IgnoredServices: map[string]struct{}{},
 		IgnoredMethods:  map[string]struct{}{},
+		IgnoredCodes:    map[codes.Code]struct{}{},
 	}
 	for _, f := range funcs {
 		o = f(o)
@@ -35,6 +41,12 @@ func (o *Options) IsIgnored(fullMethod string) bool {
 	return ok
 }
 
+// IsCodeIgnored returned true if the given code is ignored
+func (o *Options) IsCodeIgnored(c codes.Code) bool {
+	_, ok := o.IgnoredCodes[c]
+	return ok
+}
+
 // Option is a function for building configurations object for an interceptor
 type Option func(Options) Options
 
@@ -53,6 +65,16 @@ func WithIgnoredMethods(fullMethods ...string) Option {
 	return func(o Options) Options {
 		for _, m := range fullMethods {
 			o.IgnoredMethods[m] = struct{}{}
+		}
+		return o
+	}
+}
+
+// WithIgnoredCodes receives codes to get newrelic to ignore them
+func WithIgnoredCodes(cs ...codes.Code) Option {
+	return func(o Options) Options {
+		for _, c := range cs {
+			o.IgnoredCodes[c] = struct{}{}
 		}
 		return o
 	}

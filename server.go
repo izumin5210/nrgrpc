@@ -45,6 +45,9 @@ func (h *serverStatsHandlerImpl) HandleRPC(ctx context.Context, s stats.RPCStats
 		}
 		if err := s.Error; err != nil {
 			if st, ok := status.FromError(s.Error); ok {
+				if h.opts.IsCodeIgnored(st.Code()) {
+					txn.Ignore()
+				}
 				txn.AddAttribute("grpcStatusCode", st.Code())
 			}
 			txn.NoticeError(err)
