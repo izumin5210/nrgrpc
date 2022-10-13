@@ -19,8 +19,10 @@ func composeOptions(funcs []Option) Options {
 		IgnoredMethods:  map[string]struct{}{},
 		IgnoredCodes:    map[codes.Code]struct{}{},
 	}
-	for _, f := range funcs {
-		o = f(o)
+	if len(funcs) > 0 && funcs[0] != nil {
+		for _, f := range funcs {
+			o = f(o)
+		}
 	}
 	return o
 }
